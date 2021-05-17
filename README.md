@@ -1,24 +1,55 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル
 
-* Ruby version
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| name     | string | null: false |
+| email    | string | null: false, unique: true|
+| encrypted_password | string | null: false |
+| j_name   | string | null: felse |
+| j_k_name | string | null: false |
+| j_k_n_name | string | null: false |
+| j_k_n_c_name | string | null: false |
+| birthday | date | null: false |
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :items
+- has_many :comments 
 
-* Database creation
+## items テーブル
 
-* Database initialization
+| Column   | Type       | Options                        |
+| ------   | ---------- | ------------------------------ |
+| item_name | text       | null: false |
+| item_description   | text | null: false |
+| category_id | integer | null: false |
+| condiion_id | integer | null: false |
+| burden_id   | integer | null: false |
+| area_id     | integer | null: false |
+| days_id     | integer | null: false |
+| price    | integer | null: false |
+| user_id  | integer | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_many :comments 
 
-* Deployment instructions
 
-* ...
+
+## comments テーブル
+
+| Column  | Type       | Options                         |
+| ------- | ---------- | ------------------------------  |
+| user_id | integer |  |
+| item_id | integer |  |
+| text | text | null: false |
+
+### Association
+
+- belongs_to :item
+- belongs_to :user
